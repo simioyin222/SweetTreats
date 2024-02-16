@@ -90,5 +90,39 @@ namespace PierresSweetAndSavoryTreats.Controllers
             }
             return View(treat);
         }
+
+        // GET: Treats/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var treat = await _db.Treats
+                .FirstOrDefaultAsync(m => m.TreatId == id);
+            if (treat == null)
+            {
+                return NotFound();
+            }
+
+            return View(treat);
+        }
+
+        // POST: Treats/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var treat = await _db.Treats.FindAsync(id);
+            _db.Treats.Remove(treat);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool TreatExists(int id)
+        {
+            return _db.Treats.Any(e => e.TreatId == id);
+        }
     }
 }
