@@ -11,7 +11,8 @@ builder.Services.AddControllersWithViews();
 
 // Add DbContext with MySQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 21)))); // Make sure the version matches your MySQL version
+    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), 
+    ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection")))); 
 
 var app = builder.Build();
 
