@@ -8,13 +8,13 @@ namespace PierresSweetAndSavoryTreats.Models
     {
         public Treat()
         {
-            this.Flavors = new HashSet<FlavorTreat>();
+            this.Flavors = new HashSet<TreatFlavor>();
         }
 
         public int TreatId { get; set; }
         public string Name { get; set; }
         // Other properties as needed
 
-        public virtual ICollection<FlavorTreat> Flavors { get; set; }
+        public virtual ICollection<TreatFlavor> Flavors { get; set; }
     }
 }
