@@ -13,6 +13,8 @@ namespace PierresSweetAndSavoryTreats.Models
 
         public int TreatId { get; set; }
         public string Name { get; set; }
+
+        public string Description { get; set; }
         // Other properties as needed
 
         public virtual ICollection<TreatFlavor> Flavors { get; set; }
