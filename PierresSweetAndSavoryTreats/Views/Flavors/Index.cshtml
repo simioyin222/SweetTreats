@@ -1,0 +1,14 @@
+@model IEnumerable<PierresSweetAndSavoryTreats.Models.Flavor>
+
+<h2>Flavors</h2>
+
+<ul>
+@foreach (var flavor in Model)
+{
+    <li>
+        <a asp-action="Details" asp-route-id="@flavor.FlavorId">@flavor.Name</a>
+    </li>
+}
+</ul>
+
+<a asp-action="Create">Add New Flavor</a>

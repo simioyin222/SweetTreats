@@ -1,0 +1,13 @@
+@model YourNamespace.Models.Flavor
+
+<h1>Delete Flavor</h1>
+
+<h3>Are you sure you want to delete this flavor?</h3>
+<div>
+    <h4>@Model.Name</h4>
+    <form asp-action="DeleteConfirmed">
+        <input type="hidden" asp-for="FlavorId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Cancel</a>
+    </form>
+</div>
