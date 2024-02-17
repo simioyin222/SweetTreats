@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
-using PierresSweetAndSavoryTreats.ViewModels; // Update the namespace to match your project structure
+using PierresSweetAndSavoryTreats.ViewModels;
 
-namespace YourNamespace.Controllers // Make sure to replace YourNamespace with your actual project's namespace
+namespace PierresSweetAndSavoryTreats.Controllers 
 {
     public class AccountController : Controller
     {
