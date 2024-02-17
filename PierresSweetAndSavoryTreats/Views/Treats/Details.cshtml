@@ -1,0 +1,13 @@
+@model YourNamespace.Models.Treat
+
+<h1>@Model.Name</h1>
+
+<!-- where details will appear -->
+<!-- Example: -->
+<p>@Model.Description</p>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.TreatId">Edit</a> |
+    <a asp-action="Delete" asp-route-id="@Model.TreatId">Delete</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

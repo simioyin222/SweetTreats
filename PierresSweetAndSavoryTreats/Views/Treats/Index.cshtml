@@ -1,0 +1,16 @@
+@model IEnumerable<YourNamespace.Models.Treat>
+
+<h1>Treats</h1>
+
+<ul>
+@foreach (var treat in Model)
+{
+    <li>
+        <a asp-action="Details" asp-route-id="@treat.TreatId">@treat.Name</a>
+    </li>
+}
+</ul>
+
+<div>
+    <a asp-action="Create">Add New Treat</a>
+</div>
