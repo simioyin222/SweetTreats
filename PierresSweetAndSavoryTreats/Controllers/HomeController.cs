@@ -1,31 +1,34 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PierresSweetAndSavoryTreats.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
-namespace PierresSweetAndSavoryTreats.Controllers;
-
-public class HomeController : Controller
+namespace PierresSweetAndSavoryTreats.Controllers
 {
-  private readonly ILogger<HomeController> _logger;
-
-  public HomeController(ILogger<HomeController> logger)
+  public class HomeController : Controller
   {
-    _logger = logger;
-  }
+    private readonly ApplicationDbContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-  public IActionResult Index()
-  {
-    return View();
-  }
+    public HomeController(UserManager<ApplicationUser> userManager, ApplicationDbContext db)
+    {
+      _db = db;
+      _userManager = userManager;
+    }
 
-  public IActionResult Privacy()
-  {
-    return View();
-  }
+    public ActionResult Index()
+    {
+      Dictionary<string, object[]> model = new Dictionary<string, object[]>();
+      Treat[] treats = _db.Treats.ToArray();
+      Flavor[] flavors = _db.Flavors.ToArray();
 
-  [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-  public IActionResult Error()
-  {
-    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+      model.Add("treats", treats);
+      model.Add("flavors", flavors);
+
+      return View(model);
+    }
   }
 }

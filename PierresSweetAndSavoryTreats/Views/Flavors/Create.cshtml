@@ -1,18 +1,33 @@
-@model PierresSweetAndSavoryTreats.Models.Flavor
+@{
+  Layout = "_Layout";
+}
 
-<h1>Add a New Flavor</h1>
+@model PierresSweetAndSavoryTreats.Models.Flavor;
 
-<form asp-action="Create">
-    <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+<div class="subheader bg">
+  <h4>Pierre's Flavors > New</h4>
+</div>
+<br/>
+
+<div class="container col-8">
+  @using (Html.BeginForm())
+  {
+    <div class="card">
+      <div class="card-header">
+        <h5>Add New Flavor</h5>
+      </div>
+      <div class="card-body">
+        @Html.LabelFor(m => m.Type)
+        <br/>
+        @Html.TextBoxFor(m => m.Type)
+        @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
+        <br/>
+        <br/>
+      </div>
+      <div class="card-footer">
+        <input type="submit" value="Add" class="btn btn-primary" />
+        &nbsp;&nbsp;@Html.ActionLink("Back", "Index")
+      </div>
     </div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+  }
 </div>

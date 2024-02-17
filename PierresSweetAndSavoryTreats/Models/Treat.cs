@@ -1,22 +1,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PierresSweetAndSavoryTreats.Models
 {
-    public class Treat
-    {
-        public Treat()
-        {
-            this.Flavors = new HashSet<TreatFlavor>();
-        }
+  public class Treat
+  {
+    public int TreatId { get; set; }
+    [Required(ErrorMessage = "* The treat's Type can't be empty!")]
+    public string Type { get; set; }
 
-        public int TreatId { get; set; }
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-        // Other properties as needed
-
-        public virtual ICollection<TreatFlavor> Flavors { get; set; }
-    }
+    public List<TreatFlavor> JoinEntities { get; set; }
+  }
 }

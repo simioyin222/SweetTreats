@@ -1,0 +1,42 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="subheader bg">
+  <h4>Account Management</h4>
+</div>
+<br/>
+
+<div class="container col-7">
+  <div class="account-index card">
+    <div class="account-header card-header">
+      <h5>Welcome!</h5>
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+      <div class="card-body">
+        <p>Hello, @User.Identity.Name!</p>
+      </div>
+      <div class="card-footer">
+        @using (Html.BeginForm("LogOff", "Account"))
+        {
+          <input type="submit" value="Log Off" class="btn btn-primary" />
+        }
+      </div>
+    }
+    else
+    {
+      <div class="card-body">
+        @if(ViewBag.Confirmation == true)
+        {
+          <h5 class="confirmation">
+            Registration Successful!
+            @Html.ActionLink("X", "Index")
+          </h5>
+        }
+        <h5>@Html.ActionLink("Log In", "Login")</h5>
+        <h5>@Html.ActionLink("Register", "Register")</h5>
+      </div>
+    }
+  </div>
+</div>

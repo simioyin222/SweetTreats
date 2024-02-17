@@ -1,29 +1,53 @@
-@model PierresSweetAndSavoryTreats.ViewModels.RegisterViewModel
+@{
+  Layout = "_Layout";
+}
 
-<h2>Register</h2>
+@using PierresSweetAndSavoryTreats.ViewModels;
+@model RegisterViewModel;
 
-<form asp-controller="Account" asp-action="Register" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="subheader bg">
+  <h4>Account Management</h4>
+</div>
+<br/>
 
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+<div class="container col-7">
+  @using (Html.BeginForm())
+  {
+  <div class="card">
+    <div class="account-header card-header">
+      <h5>Register New User</h5>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
+    <div class="card-body row">
+      <div class="col">
+        <h5>Enter account details:</h5>
+        @Html.LabelFor(user => user.Email)
+        <br/>
+        @Html.TextBoxFor(user => user.Email)
+        <br/>
+        @Html.LabelFor(user => user.Password)
+        <br/>
+        @Html.EditorFor(user => user.Password)
+        <br/>
+        @Html.LabelFor(user => user.ConfirmPassword)
+        <br/>
+        @Html.EditorFor(user => user.ConfirmPassword)
+        <br/>
+        <br/>
+      </div>
+      <div class="col">
+        @if(!ViewData.ModelState.IsValid)
+        {
+          @Html.ValidationSummary("Please fix the following error(s):", new { @class = "text-danger" })
+        }
+      </div>
     </div>
-
-    <div class="form-group">
-        <label asp-for="ConfirmPassword"></label>
-        <input asp-for="ConfirmPassword" class="form-control" />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    <div class="register-footer card-footer">
+      <input type="submit" value="Register" class="register-btn btn btn-primary" />
+      <br/>
+      @Html.ActionLink("Back", "Index")
+      @Html.ActionLink("Have an Account? Log In", "Login")
     </div>
-
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
-
-<a asp-controller="Account" asp-action="Login">Already have an account? Log in here.</a>
+  </div>
+  }
+  <br/>
+</div>
