@@ -4,6 +4,7 @@ using PierresSweetAndSavoryTreats.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace PierresSweetAndSavoryTreats.Controllers
 {
@@ -16,113 +17,67 @@ namespace PierresSweetAndSavoryTreats.Controllers
             _db = db;
         }
 
-        // GET: Treats
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _db.Treats.ToListAsync());
+            return View(_db.Treats.ToList());
         }
 
-        // GET: Treats/Create
+        public IActionResult Details(int id)
+        {
+            var thisTreat = _db.Treats
+                .Include(treat => treat.Flavors)
+                .ThenInclude(join => join.Flavor)
+                .FirstOrDefault(treat => treat.TreatId == id);
+
+            return View(thisTreat);
+        }
+
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Treats/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TreatId,Name")] Treat treat)
+        [Authorize]
+        public IActionResult Create(Treat treat)
         {
-            if (ModelState.IsValid)
-            {
-                _db.Add(treat);
-                await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(treat);
+            _db.Treats.Add(treat);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
-        // GET: Treats/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [Authorize]
+        public IActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var treat = await _db.Treats.FindAsync(id);
-            if (treat == null)
-            {
-                return NotFound();
-            }
-            return View(treat);
+            var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+            return View(thisTreat);
         }
 
-        // POST: Treats/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TreatId,Name")] Treat treat)
+        [Authorize]
+        public IActionResult Edit(Treat treat)
         {
-            if (id != treat.TreatId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _db.Update(treat);
-                    await _db.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TreatExists(treat.TreatId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(treat);
+            _db.Entry(treat).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
-        // GET: Treats/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [Authorize]
+        public IActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var treat = await _db.Treats
-                .FirstOrDefaultAsync(m => m.TreatId == id);
-            if (treat == null)
-            {
-                return NotFound();
-            }
-
-            return View(treat);
+            var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+            return View(thisTreat);
         }
 
-        // POST: Treats/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [Authorize]
+        public IActionResult DeleteConfirmed(int id)
         {
-            var treat = await _db.Treats.FindAsync(id);
-            _db.Treats.Remove(treat);
-            await _db.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool TreatExists(int id)
-        {
-            return _db.Treats.Any(e => e.TreatId == id);
+            var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+            _db.Treats.Remove(thisTreat);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
