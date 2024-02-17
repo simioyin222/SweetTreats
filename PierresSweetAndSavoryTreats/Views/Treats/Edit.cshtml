@@ -1,0 +1,16 @@
+@model PierresSweetAndSavoryTreats.Models.Treat
+
+<h2>Edit Treat</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="TreatId" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<a asp-action="Index">Back to List</a>
