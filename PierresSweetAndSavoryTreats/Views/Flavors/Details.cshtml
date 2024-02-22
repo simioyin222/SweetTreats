@@ -1,9 +1,56 @@
-@model PierresSweetAndSavoryTreats.Models.Flavor
+@{
+  Layout = "_Layout";
+}
 
-<h2>@Model.Name</h2>
+@using System.Collections.Generic;
+@using PierresSweetAndSavoryTreats.Models;
+@model PierresSweetAndSavoryTreats.Models.Flavor;
 
-<p>
-    <a asp-action="Edit" asp-route-id="@Model.FlavorId">Edit</a> |
-    <a asp-action="Delete" asp-route-id="@Model.FlavorId">Delete</a> |
-    <a asp-action="Index">Back to List</a>
-</p>
+<div class="subheader bg">
+  <h4>Pierre's Flavors</h4>
+</div>
+<br/>
+
+<div class="container col-8">
+  <div class="card">
+    <div class="card-header">
+      <h5>@Model.Type</h5>
+      @if(User.Identity.IsAuthenticated)
+      {
+        @Html.ActionLink("Add a Treat", "AddTreat", new { id = @Model.FlavorId })
+        <br/>
+        <small>@Html.ActionLink("Edit Flavor", "Edit", new { id = @Model.FlavorId })</small> @:|
+        <small>@Html.ActionLink("Remove Flavor", "Delete", new { id = @Model.FlavorId })</small>
+      }
+    </div>
+    <div class="card-body">
+      @if(@Model.JoinEntities.Count == 0)
+      {
+        <p>There are no treats associated with this flavor.</p>
+      }
+      else
+      {
+        <h6>Treats:</h6>
+        <ul>
+          @foreach(TreatFlavor join in Model.JoinEntities)
+          {
+            @using (Html.BeginForm("DeleteJoin", "Flavors"))
+            {
+              <li>
+                @Html.ActionLink(join.Treat.Type, "Details", "Treats", new { id = join.TreatId })
+                @Html.Hidden("joinId", @join.TreatFlavorId)
+                @if(User.Identity.IsAuthenticated)
+                {
+                  <input type="submit" value="X" class="btn btn-x btn-sm btn-outline-danger" />
+                }
+              </li>
+            }
+          }
+        </ul>
+      }
+    </div>
+    <div class="card-footer">
+      @Html.ActionLink("Back to All Flavors", "Index")
+    </div>
+  </div>
+</div>
