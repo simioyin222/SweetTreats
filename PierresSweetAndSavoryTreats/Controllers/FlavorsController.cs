@@ -24,19 +24,19 @@ namespace PierresSweetAndSavoryTreats.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Index()
+    public IActionResult Index()
     {
       List<Flavor> flavors = _db.Flavors.ToList();
       return View(flavors);
     }
 
-    public ActionResult Create()
+    public IActionResult Create()
     {
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Flavor flavor)
+    public IActionResult Create(Flavor flavor)
     {
       if(!ModelState.IsValid)
       {
@@ -51,7 +51,7 @@ namespace PierresSweetAndSavoryTreats.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Details(int id)
+    public IActionResult Details(int id)
     {
       Flavor thisFlavor = _db.Flavors
                                     .Include(flavor => flavor.JoinEntities)
@@ -60,14 +60,14 @@ namespace PierresSweetAndSavoryTreats.Controllers
       return View(thisFlavor);
     }
 
-    public ActionResult Edit(int id)
+    public IActionResult Edit(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
       return View(thisFlavor);
     }
 
     [HttpPost]
-    public ActionResult Edit(Flavor flavor)
+    public IActionResult Edit(Flavor flavor)
     {
       if(!ModelState.IsValid)
       {
@@ -81,14 +81,14 @@ namespace PierresSweetAndSavoryTreats.Controllers
       }
     }
 
-    public ActionResult Delete(int id)
+    public IActionResult Delete(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
       return View(thisFlavor);
     }
 
     [HttpPost, ActionName("Delete")]
-    public ActionResult DeleteConfirmed(int id)
+    public IActionResult DeleteConfirmed(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
       _db.Flavors.Remove(thisFlavor);
@@ -96,7 +96,7 @@ namespace PierresSweetAndSavoryTreats.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActionResult AddTreat(int id)
+    public IActionResult AddTreat(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
 
@@ -108,7 +108,7 @@ namespace PierresSweetAndSavoryTreats.Controllers
     }
 
     [HttpPost]
-    public ActionResult AddTreat(Flavor flavor, int treatId)
+    public IActionResult AddTreat(Flavor flavor, int treatId)
     {
       #nullable enable
       TreatFlavor? joinEntity = _db.TreatFlavors.FirstOrDefault(join => (join.TreatId == treatId && join.FlavorId == flavor.FlavorId));
@@ -123,7 +123,7 @@ namespace PierresSweetAndSavoryTreats.Controllers
     }
 
     [HttpPost]
-    public ActionResult DeleteJoin(int joinId)
+    public IActionResult DeleteJoin(int joinId)
     {
       TreatFlavor joinEntity = _db.TreatFlavors.FirstOrDefault(join => join.TreatFlavorId == joinId);
       _db.TreatFlavors.Remove(joinEntity);

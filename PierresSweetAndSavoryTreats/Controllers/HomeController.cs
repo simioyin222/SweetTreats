@@ -19,7 +19,7 @@ namespace PierresSweetAndSavoryTreats.Controllers
       _userManager = userManager;
     }
 
-    public ActionResult Index()
+    public IActionResult Index()
     {
       Dictionary<string, object[]> model = new Dictionary<string, object[]>();
       Treat[] treats = _db.Treats.ToArray();

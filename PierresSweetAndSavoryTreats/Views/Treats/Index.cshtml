@@ -30,7 +30,7 @@
         <ul>
           @foreach(Treat treat in Model)
           {
-            <li>@Html.ActionLink(treat.Type, "Details", new { id = treat.TreatId })</li>
+            @Html.ActionLink("Add New Treat", "Create", "Treats", null, new { @class = "btn btn-primary" })
           }
         </ul>
       }

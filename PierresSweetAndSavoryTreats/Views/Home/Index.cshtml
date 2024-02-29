@@ -20,10 +20,10 @@
         @if(Model["treats"].Length == 0)
         {
           <p>There are currently no treats available.</p>
-          @if(User.Identity.IsAuthenticated)
-          {
-            @Html.ActionLink("Add a Treat", "Create", "Treats")
-          }
+      @if (User.Identity.IsAuthenticated)
+{
+    @Html.ActionLink("Add New Treat", "Create", "Treats", new { }, new { @class = "btn btn-primary" })
+}
         }
         else
         {

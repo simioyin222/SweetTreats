@@ -22,18 +22,18 @@ namespace PierresSweetAndSavoryTreats.Controllers
       _signInManager = signInManager;
     }
 
-    public ActionResult Index()
+    public IActionResult Index()
     {
       return View();
     }
 
-    public ActionResult Register()
+    public IActionResult Register()
     {
       return View();
     }
 
     [HttpPost]
-    public async Task<ActionResult> Register(RegisterViewModel model)
+    public async Task<IActionResult> Register(RegisterViewModel model)
     {
       if (!ModelState.IsValid)
       {
@@ -59,13 +59,13 @@ namespace PierresSweetAndSavoryTreats.Controllers
       }
     }
 
-    public ActionResult Login()
+    public IActionResult Login()
     {
       return View();
     }
 
     [HttpPost]
-    public async Task<ActionResult> Login(LoginViewModel model)
+    public async Task<IActionResult> Login(LoginViewModel model)
     {
       if (!ModelState.IsValid)
       {
@@ -87,7 +87,7 @@ namespace PierresSweetAndSavoryTreats.Controllers
     }
 
     [HttpPost]
-public async Task<ActionResult> LogOff()
+public async Task<IActionResult> LogOff()
 {
     await _signInManager.SignOutAsync();
     return RedirectToAction("Index", "Home");
