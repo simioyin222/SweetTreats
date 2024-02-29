@@ -1,18 +1,19 @@
 # Pierre's Sweet Treats
 A C# MVC web application utilizing databases with MySQL for our fictional shop keeper friend, Pierre. The application is used to market their sweet and savory treats. All visitors to the site can view all treats and flavors (tags describing the treat; i.e sweet, savory, etc.). To modify the entries of the site, a user must have an account and be logged in.
-By Similoluwa Oyinkolade
+
+## By Similoluwa Oyinkolade
 
 ## Technologies Used
--C#
--HTML
--CSS
--Bootstrap
--.NET 6
--ASP.NET Core MVC
--Razor View Engine
--MySQL Workbench
--MySQL Community Server
--Entity Framework Core
+C#
+HTML
+CSS
+Bootstrap
+.NET 6
+ASP.NET Core MVC
+Razor View Engine
+MySQL Workbench
+MySQL Community Server
+Entity Framework Core
 
 ## Description
 This app is for an individual weekly project on using authentication and authorization for a C# MVC web application. Identity is used to handle user authentication -- registering for an account, logging in and out. Only logged in users may access the create, update, and delete aspects for treats and flavor classes. All users may read all treats and flavor details.
@@ -61,10 +62,10 @@ $ dotnet run
 Optionally, to compile this web app without running it, enter:
 $ dotnet build
 
-##### Known Bugs
+### Known Bugs
 Currently no known bugs. Kindly notify me if you happen upon one: simiyoyin222 @
 
-## License
+### License
 MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
