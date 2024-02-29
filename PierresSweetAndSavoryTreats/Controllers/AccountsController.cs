@@ -9,13 +9,13 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace PierresSweetAndSavoryTreats.Controllers
 {
-  public class AccountController : Controller
+  public class AccountsController : Controller
   {
     private readonly ApplicationDbContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ApplicationDbContext db)
+    public AccountsController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ApplicationDbContext db)
     {
       _db = db;
       _userManager = userManager;
@@ -80,17 +80,17 @@ namespace PierresSweetAndSavoryTreats.Controllers
         }
         else
         {
-          ModelState.AddModelError("", " Please try again.");
+          ModelState.AddModelError("", "Please try again.");
           return View(model);
         }
       }
     }
 
     [HttpPost]
-    public async Task<ActionResult> LogOff()
-    {
-      await _signInManager.SignOutAsync();
-      return RedirectToAction("Index");
-    }
+public async Task<ActionResult> LogOff()
+{
+    await _signInManager.SignOutAsync();
+    return RedirectToAction("Index", "Home");
+}
   }
 }

@@ -25,6 +25,16 @@ namespace Pierres
       builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                   .AddEntityFrameworkStores<ApplicationDbContext>()
                   .AddDefaultTokenProviders();
+      builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.SlidingExpiration = true;
+    options.Cookie.IsEssential = true; // Make the cookie essential
+    // Set the LoginPath, LogoutPath, AccessDeniedPath as needed
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/LogOff";
+});
 
 WebApplication app = builder.Build();
 

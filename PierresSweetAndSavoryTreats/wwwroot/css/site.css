@@ -1,18 +1,129 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+a {
+  text-decoration:none;
 }
 
 body {
-  margin-bottom: 60px;
+  background-color: rgb(255, 253, 253);
+}
+
+/* HEADER/NAV*/
+
+.brand {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.logo {
+  width: 200px;
+}
+
+.navbar a, .nav-account a{
+  font-weight: bold;
+  font-size: large;
+  margin-top: 10px;
+  color: #590A29;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.navbar a:hover, .nav-account a:hover {
+  text-decoration: underline;
+  text-decoration-color: #590A29;
+}
+
+.nav-account {
+  float:right;
+}
+
+/* SUBHEADER */
+
+.subheader {
+  text-align: center;
+  color: #590A29;
+}
+
+.flag {
+  width: 200px;
+  height: 25px;
+  margin-top: 10px;
+}
+
+/* CARDS */
+
+.splash .card-header, .account-header h6, .account-header h5 {
+  text-align: center;
+}
+
+.account-index {
+  text-align: center;
+}
+
+.btn-x {
+  border: none;
+  font-weight: bold;
+}
+
+.login-footer, .register-footer {
+  text-align: center;
+}
+
+.login-btn, .register-btn {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.login-footer a, .register-footer a {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.splash .card-body {
+  text-align: center;
+}
+
+.splash-list {
+  text-align: start;
+}
+
+.confirmation {
+  color: rgb(232, 101, 132);
+  padding: 15px;
+  background-color: rgba(232, 101, 132, 0.115);
+  border-radius: 8px;
+}
+
+.confirmation a {
+  text-decoration: none;
+  color: rgb(232, 101, 132);
+  padding-top: 5px;
+  float: right;
+  font-size: small;
+}
+
+.confirmation a:hover {
+  color: rgb(216, 75, 108);
+}
+
+/* FOOTER */
+#footer {
+  position:fixed;
+  bottom:0px;
+  left:0px;
+  width:100%;
+  color:#CCC;
+  padding:5px;
+}
+
+/* RESPONSIVE DESIGN */
+@media screen and (max-width: 770px) {
+  .flag {
+    display: none;
+  }
+
+  .confirmation a {
+    width: 80%;
+    float: none;
+    display: inline-block;
+    /* text-align: center; */
+  }
 }
