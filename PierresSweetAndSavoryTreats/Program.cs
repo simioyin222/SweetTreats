@@ -30,10 +30,9 @@ namespace Pierres
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     options.SlidingExpiration = true;
-    options.Cookie.IsEssential = true; // Make the cookie essential
-    // Set the LoginPath, LogoutPath, AccessDeniedPath as needed
-    options.LoginPath = "/Account/Login";
-    options.LogoutPath = "/Account/LogOff";
+    options.Cookie.IsEssential = true;
+    options.LoginPath = "/Accounts/Login";
+    options.LogoutPath = "/Accounts/LogOff";
 });
 
 WebApplication app = builder.Build();
