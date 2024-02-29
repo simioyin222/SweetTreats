@@ -1,33 +1,33 @@
 @{
-  Layout = "_Layout";
+    Layout = "_Layout";
 }
 
 @model PierresSweetAndSavoryTreats.Models.Treat;
 
 <div class="subheader bg">
-  <h4>Pierre's Treats > New</h4>
+    <h4>Pierre's Treats > New</h4>
 </div>
 <br/>
 
 <div class="container col-8">
-  @using (Html.BeginForm())
-  {
-    <div class="card">
-      <div class="card-header">
-        <h5>Add New Treat</h5>
-      </div>
-      <div class="card-body">
-        @Html.LabelFor(m => m.Type)
-        <br/>
-        @Html.TextBoxFor(m => m.Type)
-        @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
-        <br/>
-        <br/>
-      </div>
-      <div class="card-footer">
-        <input type="submit" value="Add" class="btn btn-primary" />
-        &nbsp;&nbsp;@Html.ActionLink("Back", "Index")
-      </div>
-    </div>
-  }
+    @using (Html.BeginForm())
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5>Add New Treat</h5>
+            </div>
+            <div class="card-body">
+                @Html.LabelFor(m => m.Type)
+                <br/>
+                @Html.TextBoxFor(m => m.Type, new { @class = "form-control" }) // Correct usage, ensure class "form-control" is here
+                @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" }) // Display validation message for 'Type'
+                <br/>
+                <br/>
+            </div>
+            <div class="card-footer">
+                <input type="submit" value="Add" class="btn btn-primary" />
+                &nbsp;&nbsp;@Html.ActionLink("Back", "Index")
+            </div>
+        </div>
+    }
 </div>

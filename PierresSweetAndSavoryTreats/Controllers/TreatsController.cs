@@ -35,20 +35,17 @@ namespace PierresSweetAndSavoryTreats.Controllers
       return View();
     }
 
-    [HttpPost]
-    public IActionResult Create(Treat treat)
+[HttpPost]
+public IActionResult Create(Treat treat)
+{
+    if (ModelState.IsValid)
     {
-      if(!ModelState.IsValid)
-      {
-        return View(treat);
-      }
-      else
-      {
         _db.Treats.Add(treat);
-        _db.SaveChanges();
+        _db.SaveChanges(); // This line commits the changes to the database
         return RedirectToAction("Index");
-      }
     }
+    return View(treat); // Return the view with validation messages if model state is invalid
+}
 
     [AllowAnonymous]
     public IActionResult Details(int id)
