@@ -5,15 +5,25 @@ A C# MVC web application utilizing databases with MySQL for our fictional shop k
 
 ## Technologies Used
 C#
+
 HTML
+
 CSS
+
 Bootstrap
+
 .NET 6
+
 ASP.NET Core MVC
+
 Razor View Engine
+
 MySQL Workbench
+
 MySQL Community Server
+
 Entity Framework Core
+
 
 ## Description
 This app is for an individual weekly project on using authentication and authorization for a C# MVC web application. Identity is used to handle user authentication -- registering for an account, logging in and out. Only logged in users may access the create, update, and delete aspects for treats and flavor classes. All users may read all treats and flavor details.
