@@ -17,10 +17,9 @@
                 <h5>Add New Treat</h5>
             </div>
             <div class="card-body">
-                @Html.LabelFor(m => m.Type)
-                <br/>
-                @Html.TextBoxFor(m => m.Type, new { @class = "form-control" }) // Correct usage, ensure class "form-control" is here
-                @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" }) // Display validation message for 'Type'
+               @Html.LabelFor(model => model.Type)
+@Html.TextBoxFor(model => model.Type, new { @class = "form-control" })
+@Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
                 <br/>
                 <br/>
             </div>
