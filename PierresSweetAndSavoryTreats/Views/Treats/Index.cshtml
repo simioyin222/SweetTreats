@@ -11,29 +11,20 @@
 </div>
 <br/>
 
-<div class="container col-8">
-  <div class="card">
-    <div class="card-header">
-      <h5>Treats</h5>
-      @if(User.Identity.IsAuthenticated)
+<div class="main">
+  @if(@Model.Count == 0)
+  {
+    <p>No treats are currently in the database.</p>
+  }
+  else
+  {
+    <ul>
+      @foreach(Treat entry in Model)
       {
-        @Html.ActionLink("Add New Treat", "Create")
+        <li>@Html.ActionLink($"{entry.Name}", "Details", new { id = entry.TreatId }) </li>
       }
-    </div>
-    <div class="card-body">
-      @if(Model.Count == 0)
-      {
-        <p>OUT OF STOCK.</p>
-      }
-      else
-      {
-        <ul>
-          @foreach(Treat treat in Model)
-          {
-            @Html.ActionLink("Add New Treat", "Create", "Treats", null, new { @class = "btn btn-primary" })
-          }
-        </ul>
-      }
-    </div>
-  </div>
+    </ul>
+  }
 </div>
+<hr/>
+<p>@Html.ActionLink("Add a Treat", "Create")</p>

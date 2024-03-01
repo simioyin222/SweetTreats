@@ -2,47 +2,30 @@
   Layout = "_Layout";
 }
 
-@model PierresSweetAndSavoryTreats.Models.Flavor;
+@using PierresSweetAndSavoryTreats.Models;
+@model PierresSweetAndSavoryTreats.Models.Flavor
 
-<div class="subheader bg">
-  <h4>Pierre's Flavors > Add Treat</h4>
-</div>
-<br/>
-
-<div class="container col-8">
-  <div class="card">
-    <div class="card-header">
-      <h4>@Model.Type</h4>
-      <h5>Assign a Treat</h5>
-    </div>
-    @if(ViewBag.IsNoTreats)
-    {
-      <div class="card-body">
-        <p>There are currently no treats available.</p>
-        <p>Please @Html.ActionLink("Create a Treat", "Create", "Treats") first.</p>
-      </div>
-      <div class="card-footer">
-        @Html.ActionLink("Cancel", "Details", new { id = @Model.FlavorId })
-      </div>
-    }
-    else
-    {
-      @using (Html.BeginForm())
+<div class="main">
+  <p>Select a treat in the dropdown list below to add to this flavor.</p>
+  <div class="row">
+    <div class="col-5">
+      @if(@ViewBag.TreatsList.Count == 0)
       {
-        <div class="card-body">
-          @Html.HiddenFor(m => m.FlavorId)
-
-          @Html.Label("Select a Treat")
-          <br/>
-          @Html.DropDownList("TreatId")
-          <br/>
-          <br/>
-        </div>
-        <div class="card-footer">
-          <input type="submit" value="Add" class="btn btn-primary" />
-          &nbsp;&nbsp;@Html.ActionLink("Cancel", "Details", new { id = @Model.FlavorId })
-        </div>
+        <p class="text-danger">It appears the list of treats is empty. Add to the list of treats before attempting to assign it to a flavor.</p>
+        <p>@Html.ActionLink("Add a Treat to Database", "Create", "Treats")</p>
       }
-    }
+      else
+      {
+        @using (Html.BeginForm())
+        {
+          @Html.HiddenFor(entry => entry.FlavorId)
+          @Html.Label("Select treat")
+          @Html.DropDownList("TreatId")
+          <input type="submit" value="Add Treat to Flavor"/>
+        }
+      }
+    </div>
   </div>
-</div
+</div>
+<hr/>
+<p>@Html.ActionLink("Back to Details", "Details", new { id = Model.FlavorId })</p>

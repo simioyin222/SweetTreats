@@ -1,32 +1,21 @@
 @{
-    Layout = "_Layout";
+  Layout = "_Layout";
 }
 
+@using PierresSweetAndSavoryTreats.Models;
 @model PierresSweetAndSavoryTreats.Models.Flavor;
 
-<div class="subheader bg">
-    <h4>Pierre's Flavors > New</h4>
-</div>
-<br/>
+<div class="main">
+  <p>Complete the form to add a flavor tag to the database.</p>
+  <p>@Html.ValidationMessageFor(entry => entry.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
 
-<div class="container col-8">
-    @using (Html.BeginForm())
-    {
-        <div class="card">
-            <div class="card-header">
-                <h5>Add New Flavor</h5>
-            </div>
-            <div class="card-body">
-                @Html.LabelFor(model => model.Type)
-@Html.TextBoxFor(model => model.Type, new { @class = "form-control" })
-@Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-                <br/>
-                <br/>
-            </div>
-            <div class="card-footer">
-                <input type="submit" value="Add" class="btn btn-primary" />
-                &nbsp;&nbsp;@Html.ActionLink("Back", "Index")
-            </div>
-        </div>
-    }
+  @using (Html.BeginForm())
+  {
+    @Html.LabelFor(entry => entry.Name)
+    @Html.TextBoxFor(entry => entry.Name)
+    <input type="submit" value="Create Flavor Tag"/>
+  }
 </div>
+
+<hr/>
+<p>@Html.ActionLink("Back to Flavor Tag List", "Index")</p>

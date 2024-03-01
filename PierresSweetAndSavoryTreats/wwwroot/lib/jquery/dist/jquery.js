@@ -814,7 +814,7 @@ function Sizzle( selector, context, results, seed ) {
 
 				// Type selector
 				} else if ( match[ 2 ] ) {
-					push.apply( results, context.getElementsByTagName( selector ) );
+					push.apply( results, context.getElementsByName( selector ) );
 					return results;
 
 				// Class selector
@@ -1096,7 +1096,7 @@ function createPositionalPseudo( fn ) {
  * @returns {Element|Object|Boolean} The input node if acceptable, otherwise a falsy value
  */
 function testContext( context ) {
-	return context && typeof context.getElementsByTagName !== "undefined" && context;
+	return context && typeof context.getElementsByName !== "undefined" && context;
 }
 
 // Expose support vars for convenience
@@ -1184,10 +1184,10 @@ setDocument = Sizzle.setDocument = function( node ) {
 	/* getElement(s)By*
 	---------------------------------------------------------------------- */
 
-	// Check if getElementsByTagName("*") returns only elements
-	support.getElementsByTagName = assert( function( el ) {
+	// Check if getElementsByName("*") returns only elements
+	support.getElementsByName = assert( function( el ) {
 		el.appendChild( document.createComment( "" ) );
-		return !el.getElementsByTagName( "*" ).length;
+		return !el.getElementsByName( "*" ).length;
 	} );
 
 	// Support: IE<9
@@ -1258,10 +1258,10 @@ setDocument = Sizzle.setDocument = function( node ) {
 	}
 
 	// Tag
-	Expr.find[ "TAG" ] = support.getElementsByTagName ?
+	Expr.find[ "TAG" ] = support.getElementsByName ?
 		function( tag, context ) {
-			if ( typeof context.getElementsByTagName !== "undefined" ) {
-				return context.getElementsByTagName( tag );
+			if ( typeof context.getElementsByName !== "undefined" ) {
+				return context.getElementsByName( tag );
 
 			// DocumentFragment nodes don't have gEBTN
 			} else if ( support.qsa ) {
@@ -1275,7 +1275,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 				i = 0,
 
 				// By happy coincidence, a (broken) gEBTN appears on DocumentFragment nodes too
-				results = context.getElementsByTagName( tag );
+				results = context.getElementsByName( tag );
 
 			// Filter out possible comments
 			if ( tag === "*" ) {
@@ -4897,7 +4897,7 @@ jQuery.fn.extend( {
 } );
 var rcheckableType = ( /^(?:checkbox|radio)$/i );
 
-var rtagName = ( /<([a-z][^\/\0>\x20\t\r\n\f]*)/i );
+var rName = ( /<([a-z][^\/\0>\x20\t\r\n\f]*)/i );
 
 var rscriptType = ( /^$|^module$|\/(?:java|ecma)script/i );
 
@@ -4964,8 +4964,8 @@ function getAll( context, tag ) {
 	// Use typeof to avoid zero-argument method invocation on host objects (#15151)
 	var ret;
 
-	if ( typeof context.getElementsByTagName !== "undefined" ) {
-		ret = context.getElementsByTagName( tag || "*" );
+	if ( typeof context.getElementsByName !== "undefined" ) {
+		ret = context.getElementsByName( tag || "*" );
 
 	} else if ( typeof context.querySelectorAll !== "undefined" ) {
 		ret = context.querySelectorAll( tag || "*" );
@@ -5027,7 +5027,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 				tmp = tmp || fragment.appendChild( context.createElement( "div" ) );
 
 				// Deserialize a standard representation
-				tag = ( rtagName.exec( elem ) || [ "", "" ] )[ 1 ].toLowerCase();
+				tag = ( rName.exec( elem ) || [ "", "" ] )[ 1 ].toLowerCase();
 				wrap = wrapMap[ tag ] || wrapMap._default;
 				tmp.innerHTML = wrap[ 1 ] + jQuery.htmlPrefilter( elem ) + wrap[ 2 ];
 
@@ -6333,7 +6333,7 @@ jQuery.fn.extend( {
 
 			// See if we can take a shortcut and just use innerHTML
 			if ( typeof value === "string" && !rnoInnerhtml.test( value ) &&
-				!wrapMap[ ( rtagName.exec( value ) || [ "", "" ] )[ 1 ].toLowerCase() ] ) {
+				!wrapMap[ ( rName.exec( value ) || [ "", "" ] )[ 1 ].toLowerCase() ] ) {
 
 				value = jQuery.htmlPrefilter( value );
 
@@ -8869,7 +8869,7 @@ jQuery.parseXML = function( data ) {
 		xml = undefined;
 	}
 
-	if ( !xml || xml.getElementsByTagName( "parsererror" ).length ) {
+	if ( !xml || xml.getElementsByName( "parsererror" ).length ) {
 		jQuery.error( "Invalid XML: " + data );
 	}
 	return xml;

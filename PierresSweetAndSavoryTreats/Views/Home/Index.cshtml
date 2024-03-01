@@ -3,81 +3,50 @@
 }
 
 @using PierresSweetAndSavoryTreats.Models;
-<div class="subheader bg">
-  <h4>
-    Welcome to Pierre's Sweet & Savory Treats!
-  </h4>
-</div>
-<br/>
 
-<div class="row">
-  <div class="col">
-    <div class="splash card">
-      <div class="card-header">
-        <h5>Treats</h5>
-      </div>
-      <div class="card-body">
-        @if(Model["treats"].Length == 0)
-        {
-          <p>There are currently no treats available.</p>
-      @if (User.Identity.IsAuthenticated)
-{
-    @Html.ActionLink("Add New Treat", "Create", "Treats", new { }, new { @class = "btn btn-primary" })
-}
-        }
-        else
-        {
-          <ul class="splash-list">
-            @foreach(Treat treat in Model["treats"])
+<div class="main">
+  <p>Listed below are all the treats with possible flavor tags to attach to them. First have flavors tags and treats added to the database before linking them to each other.</p>
+  <hr/>
+  <div class="row">
+    <div class="col-6">
+      <h4>Treats</h4>
+      @if(Model["treats"].Length == 0)
+      {
+        <p>No treats are currently in the database.</p>
+      }
+      else
+      {
+        <table class="table table-hover">
+          <tbody>
+            @foreach(Treat entry in Model["treats"])
             {
-              <li>@Html.ActionLink(treat.Type, "Details", "Treats", new { id = treat.TreatId })</li>
+              <tr class="table-dark">
+                <td>@Html.ActionLink(@entry.Name, "Details", "Treats", new { id = @entry.TreatId })</td>
+              </tr>
             }
-          </ul>
-        }
-      </div>
+          </tbody>
+        </table>           
+      }    
     </div>
-  </div>
-  <div class="col">
-    <div class="splash card">
-      <div class="card-header">
-        <h5>Flavors</h5>
-      </div>
-      <div class="card-body">
-        @if(Model["flavors"].Length == 0)
-        {
-          <p>There are currently no flavors available.</p>
-          @if(User.Identity.IsAuthenticated)
-          {
-            @Html.ActionLink("Add a Flavor", "Create", "Flavors")
-          }
-        }
-        else
-        {
-          <ul class="splash-list">
-            @foreach(Flavor flavor in Model["flavors"])
+    <div class="col-6">
+      <h4>Flavor Tags</h4>
+      @if(Model["flavors"].Length == 0)
+      {
+        <p>No flavor tags are currently in the database.</p>
+      }
+      else
+      {
+        <table class="table table-hover">
+          <tbody>
+            @foreach(Flavor entry in Model["flavors"])
             {
-              <li>@Html.ActionLink(flavor.Type, "Details", "Flavors", new { id = flavor.FlavorId })</li>
+              <tr class="table-dark">
+                <td>@Html.ActionLink(@entry.Name, "Details", "Flavors", new { id = @entry.FlavorId })</td>
+              </tr>
             }
-          </ul>
-        }
-      </div>
+          </tbody>
+        </table>           
+      }    
     </div>
   </div>
 </div>
-
-@if((Model["treats"].Length == 0) && (Model["flavors"].Length == 0) && !User.Identity.IsAuthenticated)
-{
-  <br/>
-  <div class="row justify-content-center">
-    <div class="card col-5 container">
-      <div class="card-body text-center">
-        <h5></h5>
-        <h6>
-          To add new items, 
-          @Html.ActionLink("Sign In", "Login", "Account") or
-          @Html.ActionLink("Register a New Account", "Register", "Account")!
-        </h6>
-      </div>
-    </div>
-  </div>
-}

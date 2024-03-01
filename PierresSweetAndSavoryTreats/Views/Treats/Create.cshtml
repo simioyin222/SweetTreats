@@ -9,24 +9,17 @@
 </div>
 <br/>
 
-<div class="container col-8">
-    @using (Html.BeginForm())
-    {
-        <div class="card">
-            <div class="card-header">
-                <h5>Add New Treat</h5>
-            </div>
-            <div class="card-body">
-               @Html.LabelFor(model => model.Type)
-@Html.TextBoxFor(model => model.Type, new { @class = "form-control" })
-@Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-                <br/>
-                <br/>
-            </div>
-            <div class="card-footer">
-                <input type="submit" value="Add" class="btn btn-primary" />
-                &nbsp;&nbsp;@Html.ActionLink("Back", "Index")
-            </div>
-        </div>
-    }
+<div class="main">
+  <p>Complete the form to add a treat to the database.</p>
+  <p>@Html.ValidationMessageFor(entry => entry.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+  @using (Html.BeginForm())
+  {
+    @Html.LabelFor(treatToAdd => treatToAdd.Name)
+    @Html.TextBoxFor(treatToAdd => treatToAdd.Name)
+    <input type="submit" value="Add to Database"/>
+  }
 </div>
+
+<hr/>
+<p>@Html.ActionLink("Back to Treats List", "Index")</p>

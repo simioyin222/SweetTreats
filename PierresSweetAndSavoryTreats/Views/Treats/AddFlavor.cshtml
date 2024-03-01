@@ -9,40 +9,27 @@
 </div>
 <br/>
 
-<div class="container col-8">
-  <div class="card">
-    <div class="card-header">
-      <h4>@Model.Type</h4>
-      <h5>Assign a Flavor</h5>
-    </div>
-    @if(ViewBag.IsNoFlavors)
-    {
-      <div class="card-body">
-        <p>There are currently no flavors available.</p>
-        <p>Please @Html.ActionLink("Create a Flavor", "Create", "Flavors") first.</p>
-      </div>
-      <div class="card-footer">
-        @Html.ActionLink("Cancel", "Details", new { id = @Model.TreatId })
-      </div>
-    }
-    else
-    {
-      @using (Html.BeginForm())
+<div class="main">
+  <p>Select a flavor tag in the dropdown list below to add to this treat.</p>
+  <div class="row">
+    <div class="col-5">
+      @if(@ViewBag.FlavorsList.Count == 0)
       {
-        <div class="card-body">
-          @Html.HiddenFor(m => m.TreatId)
-
-          @Html.Label("Select a Flavor")
-          <br/>
-          @Html.DropDownList("FlavorId")
-          <br/>
-          <br/>
-        </div>
-        <div class="card-footer">
-          <input type="submit" value="Add" class="btn btn-primary" />
-          &nbsp;&nbsp;@Html.ActionLink("Cancel", "Details", new { id = @Model.TreatId })
-        </div>
+        <p class="text-danger">It appears the list of flavor tags is empty. Add to the list of flavor tags before attempting to assign it to a treat.</p>
+        <p>@Html.ActionLink("Add a Flavor Tag to Database", "Create", "Flavors")</p>
       }
-    }
+      else
+      {
+        @using (Html.BeginForm())
+        {
+          @Html.HiddenFor(entry => entry.TreatId)
+          @Html.Label("Select flavor")
+          @Html.DropDownList("FlavorId")
+          <input type="submit" value="Add Flavor Tag to Treat"/>
+        }
+      }
+    </div>
   </div>
-</div>
+</div>  
+<hr/>
+<p>@Html.ActionLink("Back to Details", "Details", new { id = Model.TreatId })</p>

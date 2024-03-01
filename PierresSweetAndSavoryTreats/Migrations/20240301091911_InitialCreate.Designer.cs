@@ -11,7 +11,7 @@ using PierresSweetAndSavoryTreats.Models;
 namespace PierresSweetAndSavoryTreats.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240217112446_InitialCreate")]
+    [Migration("20240301091911_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -219,7 +219,7 @@ namespace PierresSweetAndSavoryTreats.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -234,7 +234,7 @@ namespace PierresSweetAndSavoryTreats.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 

@@ -5,49 +5,26 @@
 @using PierresSweetAndSavoryTreats.ViewModels;
 @model RegisterViewModel;
 
-<div class="subheader bg">
-  <h4>Account Management</h4>
-</div>
-<br/>
-
-<div class="container col-7">
-  @using (Html.BeginForm())
+<div class="main">
+  @if(!ViewData.ModelState.IsValid) 
   {
-  <div class="card">
-    <div class="account-header card-header">
-      <h5>Register New User</h5>
-    </div>
-    <div class="card-body row">
-      <div class="col">
-        <h5>Enter account details:</h5>
-        @Html.LabelFor(user => user.Email)
-        <br/>
-        @Html.TextBoxFor(user => user.Email)
-        <br/>
-        @Html.LabelFor(user => user.Password)
-        <br/>
-        @Html.EditorFor(user => user.Password)
-        <br/>
-        @Html.LabelFor(user => user.ConfirmPassword)
-        <br/>
-        @Html.EditorFor(user => user.ConfirmPassword)
-        <br/>
-        <br/>
-      </div>
-      <div class="col">
-        @if(!ViewData.ModelState.IsValid)
-        {
-          @Html.ValidationSummary("Please fix the following error(s):", new { @class = "text-danger" })
-        }
-      </div>
-    </div>
-    <div class="register-footer card-footer">
-      <input type="submit" value="Register" class="register-btn btn btn-primary" />
-      <br/>
-      @Html.ActionLink("Back", "Index")
-      @Html.ActionLink("Have an Account? Log In", "Login")
-    </div>
-  </div>
+    @Html.ValidationSummary("Please fix the following error(s) and then resubmit the form:",  new { @class = "text-danger", @style = "font-weight: 600;"}) 
   }
-  <br/>
+
+  @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+  {
+    @Html.LabelFor(user => user.Email)
+    @Html.TextBoxFor(user => user.Email)
+    <br/>
+    @Html.LabelFor(user => user.Password)
+    @Html.EditorFor(user => user.Password)
+    <br/>
+    @Html.LabelFor(user => user.ConfirmPassword)
+    @Html.EditorFor(user => user.ConfirmPassword)
+    <br/>
+
+    <input type="submit" value="Register" />
+  }
 </div>
+<hr/>
+<p>@Html.ActionLink("Back to accounts page", "Index")</p>

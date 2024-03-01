@@ -2,41 +2,41 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using PierresSweetAndSavoryTreats.Models;
 using PierresSweetAndSavoryTreats.ViewModels;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace PierresSweetAndSavoryTreats.Controllers
 {
-  public class AccountsController : Controller
+  public class AccountController : Controller
   {
     private readonly ApplicationDbContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public AccountsController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ApplicationDbContext db)
+    public AccountController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext db)
     {
-      _db = db;
       _userManager = userManager;
       _signInManager = signInManager;
+      _db = db;
     }
 
-    public IActionResult Index()
+    public ActionResult Index()
     {
+      ViewBag.Title = "Authentication with Identity";
       return View();
     }
 
     public IActionResult Register()
     {
+      ViewBag.Title = "Register a new user";
       return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register(RegisterViewModel model)
+    public async Task<ActionResult> Register (RegisterViewModel model)
     {
       if (!ModelState.IsValid)
       {
+        ViewBag.Title = "Register a new user";
         return View(model);
       }
       else
@@ -45,12 +45,12 @@ namespace PierresSweetAndSavoryTreats.Controllers
         IdentityResult result = await _userManager.CreateAsync(user, model.Password);
         if (result.Succeeded)
         {
-          ViewBag.Confirmation = true;
-          return View("Index");
+          return RedirectToAction("Index");
         }
         else
         {
-          foreach(IdentityError error in result.Errors)
+          ViewBag.Title = "Register a new user";
+          foreach (IdentityError error in result.Errors)
           {
             ModelState.AddModelError("", error.Description);
           }
@@ -59,16 +59,18 @@ namespace PierresSweetAndSavoryTreats.Controllers
       }
     }
 
-    public IActionResult Login()
+    public ActionResult Login()
     {
+      ViewBag.Title = "Log in with your account";
       return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(LoginViewModel model)
+    public async Task<ActionResult> Login(LoginViewModel model)
     {
       if (!ModelState.IsValid)
       {
+        ViewBag.Title = "Log in with your account";
         return View(model);
       }
       else
@@ -80,17 +82,18 @@ namespace PierresSweetAndSavoryTreats.Controllers
         }
         else
         {
-          ModelState.AddModelError("", "Please try again.");
+          ViewBag.Title = "Log in with your account";
+          ModelState.AddModelError("", "There is something wrong with your email or username. Please try again.");
           return View(model);
         }
       }
     }
 
     [HttpPost]
-public async Task<IActionResult> LogOff()
-{
-    await _signInManager.SignOutAsync();
-    return RedirectToAction("Index", "Home");
-}
+    public async Task<ActionResult> LogOff()
+    {
+      await _signInManager.SignOutAsync();
+      return RedirectToAction("Index");
+    }
   }
 }

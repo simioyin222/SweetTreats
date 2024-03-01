@@ -10,28 +10,16 @@
 </div>
 <br/>
 
-<div class="container col-8">
+<div class="main">
+  <p>Edit the details below and click Save to keep changes.<p>
+  <p>@Html.ValidationMessageFor(entry => entry.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>  
+
   @using (Html.BeginForm())
   {
-    <div class="card">
-      <div class="card-header">
-        <h4>@Model.Type</h4>
-        <h6>Edit Treat Details</h6>
-      </div>
-      <div class="card-body">
-        @Html.HiddenFor(m => m.TreatId)
-
-        @Html.LabelFor(m => m.Type)
-        <br/>
-        @Html.EditorFor(m => m.Type)
-        <br/>
-        @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
-        <br/>
-      </div>
-      <div class="card-footer">
-        <input type="submit" value="Save" class="btn btn-primary" />
-        &nbsp;&nbsp;@Html.ActionLink("Cancel", "Details", new { id = @Model.TreatId })
-      </div>
-    </div>
+    @Html.HiddenFor(entry => entry.TreatId)
+    <p>@Html.LabelFor(entry => entry.Name) @Html.EditorFor(entry => entry.Name) <input type="submit" value="Save"/></p>
   }
 </div>
+
+<hr/>
+<p>@Html.ActionLink("Back to Treat Details", "Details", new { id = Model.TreatId })

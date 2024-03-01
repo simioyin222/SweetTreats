@@ -10,20 +10,13 @@
 </div>
 <br/>
 
-<div class="container col-8">
-  <div class="card">
-    <div class="card-header">
-      <h5>Treat: @Model.Type</h5>
-    </div>
-    <div class="card-body">
-      <h5>Are you sure you want to delete this?</h5>
-    </div>
-    <div class="card-footer">
-      @using (Html.BeginForm())
-      {
-        <input type="submit" value="Delete" class="btn btn-danger" />
-        @Html.ActionLink("Cancel", "Details", new { id = @Model.TreatId })
-      }
-    </div>
-  </div>
+<div class="main">
+  <p>Are you sure you want to remove this treat from the database?</p>
+  @using (Html.BeginForm())
+  {
+    <input type="submit" value="Delete Entry"/>
+  }
 </div>
+
+<hr/>
+<p>@Html.ActionLink("Back to Treat Details", "Details", new { id = Model.TreatId }) </p>

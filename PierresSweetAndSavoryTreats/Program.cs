@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using PierresSweetAndSavoryTreats.Models;
 
-namespace Pierres
+namespace PierresSweetAndSavoryTreats
 {
   class Program
   {
@@ -18,31 +18,23 @@ namespace Pierres
                         dbContextOptions => dbContextOptions
                           .UseMySql(
                             builder.Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"]
-                            )
                           )
-                        );
-      
+                        )
+                      );
+
       builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-                  .AddEntityFrameworkStores<ApplicationDbContext>()
-                  .AddDefaultTokenProviders();
-      builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-    options.SlidingExpiration = true;
-    options.Cookie.IsEssential = true;
-    options.LoginPath = "/Accounts/Login";
-    options.LogoutPath = "/Accounts/LogOff";
-});
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
-WebApplication app = builder.Build();
+      WebApplication app = builder.Build();
 
+      //   app.UseDeveloperExceptionPage();
       app.UseHttpsRedirection();
       app.UseStaticFiles();
-      
+
       app.UseRouting();
 
-      app.UseAuthentication();
+      app.UseAuthentication(); 
       app.UseAuthorization();
 
       app.MapControllerRoute(

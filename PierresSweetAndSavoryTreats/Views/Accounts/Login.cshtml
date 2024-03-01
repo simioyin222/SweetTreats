@@ -2,50 +2,25 @@
   Layout = "_Layout";
 }
 
-@using PierresSweetAndSavoryTreats.ViewModels;
-@model LoginViewModel;
+@using PierresSweetAndSavoryTreats.ViewModels
+@model LoginViewModel
 
-<div class="subheader bg">
-  <h4>Account Management</h4>
-</div>
-<br/>
+<div class="main">
+  @if(!ViewData.ModelState.IsValid) 
+  {
+    @Html.ValidationSummary("Please fix the following error(s) and then resubmit the form:",  new { @class = "text-danger", @style = "font-weight: 600;"}) 
+  }
 
-<div class="container col-7">
   @using (Html.BeginForm())
   {
-  <div class="card">
-    <div class="account-header card-header">
-      <h6>Welcome back!</h6>
-      <h5>Log In</h5>
-    </div>
-    <div class="card-body row">
-      <div class="col ">
-        <h5>Enter user credentials:</h5>
-        <br/>
-        @Html.LabelFor(user => user.Email)
-        <br/>
-        @Html.TextBoxFor(user => user.Email)
-        <br/>
-        @Html.LabelFor(user => user.Password)
-        <br/>
-        @Html.EditorFor(user => user.Password)
-        <br/>
-        <br/>
-      </div>
-      <div class="col">
-        @if(!ViewData.ModelState.IsValid)
-        {
-          @Html.ValidationSummary("Please fix the following error(s) and resubmit:", new { @class = "text-danger" })
-        }
-      </div>
-    </div>
-    <div class="login-footer card-footer">
-      <input type="submit" value="Log In" class="login-btn btn btn-primary" />
-      <br/>
-      @Html.ActionLink("Back", "Index")
-      @Html.ActionLink("Register a New Account", "Register")
-    </div>
-  </div>
+    @Html.LabelFor(m => m.Email)
+    @Html.TextBoxFor(m => m.Email)
+
+    @Html.LabelFor(m => m.Password)
+    @Html.EditorFor(m => m.Password)
+
+    <input type="submit" value="Log in" />
   }
-  <br/>
 </div>
+<p>@Html.ActionLink("Register for an account", "Register")</p>
+<p>@Html.ActionLink("Back to accounts page", "Index")</p>

@@ -11,46 +11,39 @@
 </div>
 <br/>
 
-<div class="container col-8">
-  <div class="card">
-    <div class="card-header">
-      <h5>@Model.Type</h5>
-      @if(User.Identity.IsAuthenticated)
-      {
-        @Html.ActionLink("Add a Flavor", "AddFlavor", new { id = @Model.TreatId })
-        <br/>
-        <small>@Html.ActionLink("Edit Treat", "Edit", new { id = @Model.TreatId })</small> @:|
-        <small>@Html.ActionLink("Remove Treat", "Delete", new { id = @Model.TreatId })</small>
-      }
+<div class="main">
+  <div class="row">
+    <div class="col-5">
+      <h4>Treat</h4>
+      <p><strong>@Html.DisplayNameFor(chosenTreat => chosenTreat.Name)</strong>: @Html.DisplayFor(chosenTreat => chosenTreat.Name)</p>
     </div>
-    <div class="card-body">
+    <div class="col-7">
+      <h4>Flavor Tags</h4>
       @if(@Model.JoinEntities.Count == 0)
       {
-        <p>This treat is void of any flavors.</p>
+        <p>This treat currently does not have any flavor tags.</p>
       }
       else
       {
-        <h6>Flavors:</h6>
         <ul>
-          @foreach(TreatFlavor join in Model.JoinEntities)
+          @foreach(TreatFlavor joinEntry in Model.JoinEntities)
           {
-            @using (Html.BeginForm("DeleteJoin", "Treats"))
+            <li>@joinEntry.Flavor.Name
+            @using(Html.BeginForm("DeleteJoin", "Treats"))
             {
-              <li>
-                @Html.ActionLink(join.Flavor.Type, "Details", "Flavors", new { id = join.FlavorId })
-                @Html.Hidden("joinId", @join.TreatFlavorId)
-                @if(User.Identity.IsAuthenticated)
-                {
-                  <input type="submit" value="X" class="btn btn-x btn-sm btn-outline-danger" />
-                }
-              </li>
+              @Html.Hidden("joinId", @joinEntry.TreatFlavorId)
+              <input type="submit" value="Remove"/>
             }
+            </li>
           }
         </ul>
       }
     </div>
-    <div class="card-footer">
-      @Html.ActionLink("Back to All Treats", "Index")
-    </div>
   </div>
-</div>
+</div>  
+<hr/>
+
+<p>@Html.ActionLink("Add Flavor Tags", "AddFlavorTag", new { id = Model.TreatId })</p>
+<p>@Html.ActionLink("Edit Treat Details", "Edit", new { id = Model.TreatId })</p>
+<p>@Html.ActionLink("Delete Treat Entry", "Delete", new { id = Model.TreatId })</p>
+<p>@Html.ActionLink("Back to Treats List", "Index")</p>
