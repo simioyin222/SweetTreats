@@ -27,25 +27,31 @@ namespace PierresSweetAndSavoryTreats.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.Title = "Add a Flavor Tag";
+      ViewBag.Title = "Add a Flavor";
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Flavor newlyAdded)
+public async Task<ActionResult> Create(Flavor newlyAdded)
+{
+  if (ModelState.IsValid)
+  {
+    _db.Flavors.Add(newlyAdded);
+    try
     {
-      if(ModelState.IsValid)
-      {
-        _db.Flavors.Add(newlyAdded);
-        _db.SaveChanges();
-        return RedirectToAction("Index");
-      }
-      else
-      {
-        ViewBag.Title = "Add a Flavor Tag";
-        return View(newlyAdded);
-      }
+      await _db.SaveChangesAsync();
+      return RedirectToAction("Index");
     }
+    catch (Exception ex)
+    {
+      // Log the exception (ex) here
+      ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+    }
+  }
+  
+  ViewBag.Title = "Add a Flavor";
+  return View(newlyAdded);
+}
 
     [AllowAnonymous]
     public ActionResult Details(int id)
