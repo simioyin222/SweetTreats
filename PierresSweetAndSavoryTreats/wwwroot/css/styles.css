@@ -1,43 +1,46 @@
 body {
-  background-color: #2a3439;
-  color: #eb6123;
+  background-color: #242F3E; /* Darker shade for better contrast */
+  color: #F4EDEA; /* Softer off-white for general text for improved readability */
 }
 
 p {
-  color: #b200ed;
+  color: #CBA6C3; /* Soft purple for paragraph text, enhancing readability */
 }
 
 a {
-  color: #faf9f6;
+  color: #EAD2AC; /* A soft cream color for links, ensuring readability */
 }
 
 a:hover {
-  color: #ffd21c;
+  color: #F4B860; /* A brighter orange for hover states, improving visibility */
 }
 
 li {
-  color: #ffd21c;
+  color: #F4B860; /* Matching list items with the hover state color for consistency */
 }
 
 .main a {
-  color: #9853eb;
+  color: #B5EAD7; /* A soft teal for links inside .main, for a refreshing look */
 }
 
 .main a:hover {
-  color: #b200ed;
+  color: #CBA6C3; /* Soft purple on hover to match paragraph styling */
 }
 
 .main p {
-  color: #ffd21c;
+  color: #F4B860; /* Consistent with the li and a:hover color for harmony */
 }
 
 .text-danger {
-  font-weight: 600;
+  font-weight: 600; /* Keeping bold for importance but ensuring color contrasts well */
+  color: #FF6B6B; /* Bright red for error messages or warnings to grab attention */
 }
 
 input[type="text"],
 textarea,
 #Password,
 #ConfirmPassword {
-  background-color: #ffd21c;
+  background-color: #F4EDEA; /* Softer off-white for input fields for better visibility */
+  border: 1px solid #CBA6C3; /* Adding a border to input fields for better definition */
+  color: #242F3E; /* Dark text for contrast against the input background */
 }

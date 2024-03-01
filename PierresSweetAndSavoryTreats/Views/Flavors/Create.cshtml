@@ -2,20 +2,20 @@
   Layout = "_Layout";
 }
 
-@using PierresSweetAndSavoryTreats.Models;
-@model PierresSweetAndSavoryTreats.Models.Flavor;
+@using PierresSweetAndSavoryTreats.Models
+@model PierresSweetAndSavoryTreats.Models.Flavor
 
 <div class="main">
-  <p>Complete the form to add a flavor name to the database.</p>
-  <p>@Html.ValidationMessageFor(entry => entry.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
-
-  @using (Html.BeginForm())
-  {
-    @Html.LabelFor(entry => entry.Name)
-    @Html.TextBoxFor(entry => entry.Name)
-    <input type="submit" value="Create Flavor Name"/>
-  }
+    <p>Complete the form to add a flavor name to the database.</p>
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Create Flavor Name" class="btn btn-primary" />
+    </form>
 </div>
 
 <hr/>
-<p>@Html.ActionLink("Back to Flavor Name List", "Index")</p>
+<a asp-action="Index">Back to Flavor Name List</a>
