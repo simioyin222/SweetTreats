@@ -11,23 +11,20 @@ namespace PierresSweetAndSavoryTreats.Controllers
   public class HomeController : Controller
   {
     private readonly ApplicationDbContext _db;
-    private readonly UserManager<ApplicationUser> _userManager;
 
-    public HomeController(UserManager<ApplicationUser> userManager, ApplicationDbContext db)
+    public HomeController(ApplicationDbContext db)
     {
       _db = db;
-      _userManager = userManager;
     }
 
-    public IActionResult Index()
+    public ActionResult Index()
     {
-      Dictionary<string, object[]> model = new Dictionary<string, object[]>();
-      Treat[] treats = _db.Treats.ToArray();
-      Flavor[] flavors = _db.Flavors.ToArray();
-
-      model.Add("treats", treats);
-      model.Add("flavors", flavors);
-
+      ViewBag.Title = "Pierre's Sweet and Savory Treats";
+      Flavor[] flavorsArray = _db.Flavors.ToArray();
+      Treat[] treatsArray = _db.Treats.ToArray();
+      Dictionary<string,object[]> model = new Dictionary<string,object[]>();
+      model.Add("flavors", flavorsArray);
+      model.Add("treats", treatsArray);
       return View(model);
     }
   }

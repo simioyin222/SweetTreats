@@ -1,0 +1,43 @@
+body {
+  background-color: #2a3439;
+  color: #eb6123;
+}
+
+p {
+  color: #b200ed;
+}
+
+a {
+  color: #faf9f6;
+}
+
+a:hover {
+  color: #ffd21c;
+}
+
+li {
+  color: #ffd21c;
+}
+
+.main a {
+  color: #9853eb;
+}
+
+.main a:hover {
+  color: #b200ed;
+}
+
+.main p {
+  color: #ffd21c;
+}
+
+.text-danger {
+  font-weight: 600;
+}
+
+input[type="text"],
+textarea,
+#Password,
+#ConfirmPassword {
+  background-color: #ffd21c;
+}

@@ -10,12 +10,12 @@
 <br/>
 
 <div class="main">
-  <p>Select a flavor tag in the dropdown list below to add to this treat.</p>
+  <p>Select a flavor name in the dropdown list below to add to this treat.</p>
   <div class="row">
     <div class="col-5">
       @if(@ViewBag.FlavorsList.Count == 0)
       {
-        <p class="text-danger">It appears the list of flavor tags is empty. Add to the list of flavor tags before attempting to assign it to a treat.</p>
+        <p class="text-danger">It appears the list of flavor names is empty. Add to the list of flavor tags before attempting to assign it to a treat.</p>
         <p>@Html.ActionLink("Add a Flavor Tag to Database", "Create", "Flavors")</p>
       }
       else

@@ -37,7 +37,7 @@ Setting Up the Project
 2. Navigate to where you want to place the cloned directory. s 
 3. Clone the repository from the GitHub link by entering in this command:
 
-$ git clone https://github.com/joncheng-dev/SweetAndSavoryTreats.Solution.git
+$ git clone https://github.com/simioyin222/SweetTreats
 4. Navigate to the project's production directory Treats, and create a new file called appsettings.json.
 
 5. Within appsettings.json, add the following code, replacing the uid, and pwd values with your username and password for MySQL. Under database, add any fitting name -- although treats_shop_db is suggested for clarity of purpose.

@@ -2,7 +2,6 @@
   Layout = "_Layout";
 }
 
-@using System.Collections.Generic;
 @using PierresSweetAndSavoryTreats.Models;
 @model PierresSweetAndSavoryTreats.Models.Flavor;
 
@@ -43,7 +42,7 @@
 </div>  
 <hr/>
 
-<p>@Html.ActionLink("Add a Treat to this Flavor Tag", "AddTreat", new { id = Model.FlavorId })</p>
-<p>@Html.ActionLink("Edit Flavor Tag Details", "Edit", new { id = Model.FlavorId })</p>
-<p>@Html.ActionLink("Delete Flavor Tag Entry", "Delete", new { id = Model.FlavorId })</p>
-<p>@Html.ActionLink("Back to Flavor Tags List", "Index")</p>
+<p>@Html.ActionLink("Add a Treat to this Flavor Name", "AddTreat", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Edit Flavor Name Details", "Edit", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Delete Flavor Name Entry", "Delete", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Back to Flavor Names List", "Index")</p>

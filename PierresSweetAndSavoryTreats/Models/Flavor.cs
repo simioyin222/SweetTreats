@@ -9,7 +9,7 @@ namespace PierresSweetAndSavoryTreats.Models
     public int FlavorId { get; set; }
     [RegularExpression(@"^[a-zA-Z0-9. ]+$", ErrorMessage = "Please enter up to 40 alphanumeric characters.")]
     [Required(ErrorMessage = "Please enter a valid input for the flavor tag.")]
-    [Display(Name = "Tag Name")]    
+    [Display(Name = "Name")]    
     public string Name { get; set; }
     public List<TreatFlavor> JoinEntities { get; }
   }
