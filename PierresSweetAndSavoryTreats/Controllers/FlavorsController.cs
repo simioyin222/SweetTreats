@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using PierresSweetAndSavoryTreats.Models;
+using Sweets.Models;
 using System.Collections.Generic;
 using System.Linq; 
 
-namespace PierresSweetAndSavoryTreats.Controllers
+namespace Sweets.Controllers
 {
   [Authorize]
   public class FlavorsController : Controller
@@ -31,26 +31,17 @@ namespace PierresSweetAndSavoryTreats.Controllers
       return View();
     }
 
-    [HttpPost]
-public async Task<ActionResult> Create(Flavor newlyAdded)
+
+[HttpPost]
+public async Task<IActionResult> Create(Flavor flavor)
 {
-  if (ModelState.IsValid)
-  {
-    _db.Flavors.Add(newlyAdded);
-    try
+    if (ModelState.IsValid)
     {
-      await _db.SaveChangesAsync();
-      return RedirectToAction("Index");
+        _db.Flavors.Add(flavor);
+        await _db.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
     }
-    catch (Exception ex)
-    {
-      // Log the exception (ex) here
-      ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-    }
-  }
-  
-  ViewBag.Title = "Add a Flavor";
-  return View(newlyAdded);
+    return View(flavor);
 }
 
     [AllowAnonymous]

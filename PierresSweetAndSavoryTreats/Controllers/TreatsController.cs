@@ -32,25 +32,15 @@ namespace PierresSweetAndSavoryTreats.Controllers
     }
 
     [HttpPost]
-public async Task<ActionResult> Create(Treat newlyAdded)
+public async Task<IActionResult> Create(Treat treat)
 {
-  if (ModelState.IsValid)
-  {
-    _db.Treats.Add(newlyAdded);
-    try
+    if (ModelState.IsValid)
     {
-      await _db.SaveChangesAsync();
-      return RedirectToAction("Index");
+        _db.Treats.Add(treat);
+        await _db.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
     }
-    catch (Exception ex)
-    {
-      // Log the exception (ex) here
-      ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-    }
-  }
-  
-  ViewBag.Title = "Add a Treat";
-  return View(newlyAdded);
+    return View(treat);
 }
 
     [AllowAnonymous]
